@@ -32,10 +32,11 @@ import (
 
 	otrace "go.opencensus.io/trace"
 
-	"github.com/dgraph-io/badger/v3/options"
-	"github.com/dgraph-io/badger/v3/pb"
-	"github.com/dgraph-io/badger/v3/table"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/options"
+	"github.com/HaHadaxigua/badger/pb"
+	"github.com/HaHadaxigua/badger/table"
+	"github.com/HaHadaxigua/badger/y"
+
 	"github.com/dgraph-io/ristretto/z"
 	"github.com/pkg/errors"
 )
@@ -76,6 +77,8 @@ func revertToManifest(kv *DB, mf *Manifest, idMap map[uint64]struct{}) error {
 	return nil
 }
 
+var ErrInternalPanic = errors.New("failed to initialize db directory")
+
 func newLevelsController(db *DB, mf *Manifest) (*levelsController, error) {
 	y.AssertTrue(db.opt.NumLevelZeroTablesStall > db.opt.NumLevelZeroTables)
 	s := &levelsController{
@@ -112,6 +115,8 @@ func newLevelsController(db *DB, mf *Manifest) (*levelsController, error) {
 	tick := time.NewTicker(3 * time.Second)
 	defer tick.Stop()
 
+	panicCh := make(chan struct{}, len(mf.Tables))
+
 	for fileID, tf := range mf.Tables {
 		fname := table.NewFilename(fileID, db.opt.Dir)
 		select {
@@ -132,6 +137,12 @@ func newLevelsController(db *DB, mf *Manifest) (*levelsController, error) {
 			defer func() {
 				throttle.Done(rerr)
 				atomic.AddInt32(&numOpened, 1)
+				if r := recover(); r == nil {
+					return
+				}
+
+				// send panic info
+				panicCh <- struct{}{}
 			}()
 			dk, err := db.registry.DataKey(tf.KeyID)
 			if err != nil {
@@ -165,6 +176,11 @@ func newLevelsController(db *DB, mf *Manifest) (*levelsController, error) {
 			mu.Unlock()
 		}(fname, tf)
 	}
+
+	if len(panicCh) != 0 {
+		return nil, ErrInternalPanic
+	}
+
 	if err := throttle.Finish(); err != nil {
 		closeAllTables(tables)
 		return nil, err

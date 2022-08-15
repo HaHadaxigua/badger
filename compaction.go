@@ -23,8 +23,8 @@ import (
 	"math"
 	"sync"
 
-	"github.com/dgraph-io/badger/v3/table"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/table"
+	"github.com/HaHadaxigua/badger/y"
 )
 
 type keyRange struct {

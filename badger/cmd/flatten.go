@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/dgraph-io/badger/v3"
-	"github.com/dgraph-io/badger/v3/options"
+	"github.com/HaHadaxigua/badger"
+	"github.com/HaHadaxigua/badger/options"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )

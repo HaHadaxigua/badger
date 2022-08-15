@@ -27,9 +27,9 @@ import (
 	"github.com/dgraph-io/ristretto/z"
 	"github.com/pkg/errors"
 
-	"github.com/dgraph-io/badger/v3/options"
-	"github.com/dgraph-io/badger/v3/table"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/options"
+	"github.com/HaHadaxigua/badger/table"
+	"github.com/HaHadaxigua/badger/y"
 )
 
 // Note: If you add a new option X make sure you also add a WithX method on Options.
@@ -518,7 +518,7 @@ func (opt Options) WithValueThreshold(val int64) Options {
 // and only 1 percent in vlog. The value threshold will be dynamically updated within the range of
 // [ValueThreshold, Options.maxValueThreshold]
 //
-// Say VLogPercentile with 1.0 means threshold will eventually set to Options.maxValueThreshold
+// # Say VLogPercentile with 1.0 means threshold will eventually set to Options.maxValueThreshold
 //
 // The default value of VLogPercentile is 0.0.
 func (opt Options) WithVLogPercentile(t float64) Options {

@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/dgraph-io/badger/v3/pb"
-	"github.com/dgraph-io/badger/v3/table"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/pb"
+	"github.com/HaHadaxigua/badger/table"
+	"github.com/HaHadaxigua/badger/y"
 	"github.com/dgraph-io/ristretto/z"
 	humanize "github.com/dustin/go-humanize"
 	"github.com/golang/protobuf/proto"

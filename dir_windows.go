@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 /*
@@ -24,7 +25,7 @@ import (
 	"path/filepath"
 	"syscall"
 
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/y"
 )
 
 // FILE_ATTRIBUTE_TEMPORARY - A file that is being used for temporary storage.

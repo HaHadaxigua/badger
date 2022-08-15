@@ -25,9 +25,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/dgraph-io/badger/v3/pb"
-	bpb "github.com/dgraph-io/badger/v3/pb"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/pb"
+	bpb "github.com/HaHadaxigua/badger/pb"
+	"github.com/HaHadaxigua/badger/y"
+
 	"github.com/dgraph-io/ristretto/z"
 	"github.com/golang/protobuf/proto"
 	"github.com/stretchr/testify/require"

@@ -28,8 +28,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/dgraph-io/badger/v3/pb"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/pb"
+	"github.com/HaHadaxigua/badger/y"
 	"github.com/pkg/errors"
 )
 

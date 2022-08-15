@@ -30,10 +30,10 @@ import (
 
 	otrace "go.opencensus.io/trace"
 
-	"github.com/dgraph-io/badger/v3/options"
-	"github.com/dgraph-io/badger/v3/pb"
-	"github.com/dgraph-io/badger/v3/table"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/options"
+	"github.com/HaHadaxigua/badger/pb"
+	"github.com/HaHadaxigua/badger/table"
+	"github.com/HaHadaxigua/badger/y"
 	"github.com/stretchr/testify/require"
 )
 

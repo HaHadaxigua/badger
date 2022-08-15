@@ -35,11 +35,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/dgraph-io/badger/v3/options"
+	"github.com/HaHadaxigua/badger/options"
+	"github.com/HaHadaxigua/badger/pb"
+	"github.com/HaHadaxigua/badger/table"
+	"github.com/HaHadaxigua/badger/y"
 
-	"github.com/dgraph-io/badger/v3/pb"
-	"github.com/dgraph-io/badger/v3/table"
-	"github.com/dgraph-io/badger/v3/y"
 	"github.com/dgraph-io/ristretto/z"
 	"github.com/stretchr/testify/require"
 )
@@ -658,12 +658,17 @@ func TestL0GCBug(t *testing.T) {
 //
 // The test has 3 steps
 // Step 1 - Create badger data. It is necessary that the value size is
-//          greater than valuethreshold. The value log file size after
-//          this step is around 170 bytes.
+//
+//	greater than valuethreshold. The value log file size after
+//	this step is around 170 bytes.
+//
 // Step 2 - Re-open the same badger and simulate a crash. The value log file
-//          size after this crash is around 2 GB (we increase the file size to mmap it).
+//
+//	size after this crash is around 2 GB (we increase the file size to mmap it).
+//
 // Step 3 - Re-open the same badger. We should be able to read all the data
-//          inserted in the first step.
+//
+//	inserted in the first step.
 func TestWindowsDataLoss(t *testing.T) {
 	if runtime.GOOS != "windows" {
 		t.Skip("The test is only for Windows.")

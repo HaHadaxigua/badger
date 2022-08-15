@@ -32,8 +32,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/dgraph-io/badger/v3/skl"
-	"github.com/dgraph-io/badger/v3/y"
+	"github.com/HaHadaxigua/badger/skl"
+	"github.com/HaHadaxigua/badger/y"
 	"github.com/dgraph-io/ristretto/z"
 	"github.com/pkg/errors"
 	otrace "go.opencensus.io/trace"
